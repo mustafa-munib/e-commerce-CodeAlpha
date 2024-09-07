@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/styles/tailwind.css">
+</head>
+<body class="bg-gray-100">
+  <!-- Navbar -->
+  <nav class="bg-blue-500 p-4">
+    <div class="container mx-auto flex justify-between items-center">
+      <a href="/" class="text-white text-2xl font-bold">MyStore</a>
+      <div class="hidden md:flex space-x-4">
+        <a href="/" class="text-white hover:text-gray-200">Home</a>
+        <a href="/products/create" class="text-white hover:text-gray-200">Create Product</a>
+        <a href="/products/list" class="text-white hover:text-gray-200">Products</a>
+      </div>
+      <button id="menu-btn" class="md:hidden text-white focus:outline-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+        </svg>
+      </button>
+    </div>
+    <div id="mobile-menu" class="md:hidden absolute top-16 left-0 w-full bg-blue-500 hidden">
+      <a href="/" class="block text-white px-4 py-2 hover:bg-blue-600">Home</a>
+      <a href="/products/create" class="block text-white px-4 py-2 hover:bg-blue-600">Create Product</a>
+      <a href="/products/list" class="block text-white px-4 py-2 hover:bg-blue-600">Products</a>
+    </div>
+  </nav>
+
+  <!-- Product Details -->
+  <div id="product-details" class="container mx-auto p-4">
+    <!-- Product details will be inserted here via JavaScript -->
+  </div>
+
+  <script>
+    // Fetch and display product details
+    const urlParams = new URLSearchParams(window.location.search);
+const productId = urlParams.get('id');
+
+fetch(`/products/${productId}`)
+  .then(response => response.json())
+  .then(product => {
+    // Render product details
+  })
+  .catch(error => console.error('Error fetching product details:', error));
+        productDetails.innerHTML = `
+          <div class="bg-white shadow-md rounded-lg overflow-hidden">
+            <img src="${product.image}" alt="${product.name}" class="w-full h-96 object-cover">
+            <div class="p-4">
+              <h1 class="text-3xl font-bold">${product.name}</h1>
+              <p class="text-lg text-gray-500 mt-2">${product.description}</p>
+              <p class="text-xl font-bold mt-4">$${product.price}</p>
+              <div class="mt-6">
+                <a href="/products/edit/${product._id}" class="bg-yellow-500 text-white py-2 px-4 rounded">Edit</a>
+                <form action="/products/delete/${product._id}" method="POST" style="display:inline;">
+                  <button type="submit" class="bg-red-500 text-white py-2 px-4 rounded ml-4" onclick="return confirm('Are you sure you want to delete this product?')">Delete</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        `;
+      })
+      .catch(error => console.error('Error fetching product details:', error));
+  </script>
+</body>
+</html>

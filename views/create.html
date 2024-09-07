@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Product - E-Commerce</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-4">
+  <h1 class="text-3xl font-bold mb-4">Add a New Product</h1>
+  <form action="/products/add" method="POST" enctype="multipart/form-data" class="space-y-4">
+    <input type="text" name="name" placeholder="Product Name" class="border p-2 w-full" required>
+    <input type="number" name="price" placeholder="Price" class="border p-2 w-full" required>
+    <textarea name="description" placeholder="Description" class="border p-2 w-full"></textarea>
+    <input type="file" name="image" class="border p-2 w-full">
+    <button type="submit" class="bg-blue-500 text-white py-2 px-4 w-full">Add Product</button>
+  </form>
+</body>
+</html>
